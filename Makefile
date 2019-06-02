@@ -11,6 +11,9 @@ CFLAGS := -Wall -Wextra -Werror -pedantic -ansi
 #INCLUDES = -I/home/user/include
 INCLUDES :=
 
+# Flags to be passed to the linker.
+LDFLAGS := -Wl,--format=binary -Wl,wordlists/short_words.txt -Wl,--format=default
+
 # Additional directories to look in for libraries.
 #LFLAGS = -L/home/user/include
 LFLAGS :=
@@ -53,8 +56,7 @@ OBJS := $(patsubst %.$(SRCEXT),%.$(OBJEXT),$(SRCS))
 # Renames temporary dependency files to real dependency files, then touches the
 # object file. This makes sure that the object file is newer than the real
 # dependency file so make doesn't have to rebuild everything every time.
-POSTCOMPILE = @mv -f $(DEPDIR)/$*.$(TMPDEPEXT) $(DEPDIR)/$*.$(DEPEXT) && \
-	touch $@
+POSTCOMPILE = @mv -f $(DEPDIR)/$*.$(TMPDEPEXT) $(DEPDIR)/$*.$(DEPEXT) && touch $@
 
 # Make sure BUILDDIR and DEPDIR are created.
 $(shell mkdir -p $(BUILDDIR) $(DEPDIR) > /dev/null)
@@ -65,7 +67,7 @@ all: $(MAIN)
 	@echo Program $(MAIN) has been compiled.
 
 $(MAIN): $(BUILDDIR)/$(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(BUILDDIR)/$(OBJS) $(LFLAGS) $(LIBS)
+	$(CC) $(LDFLAGS) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(BUILDDIR)/$(OBJS) $(LFLAGS) $(LIBS)
 
 # Generic rule for building object files from source files.
 $(BUILDDIR)/%.$(OBJEXT) : %.$(SRCEXT) $(DEPDIR)/%.$(DEPEXT)
