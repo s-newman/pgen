@@ -1,0 +1,6 @@
+# Editor settings
+.vscode/
+
+# Build artifacts
+build/
+pgen
