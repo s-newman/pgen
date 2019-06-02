@@ -12,7 +12,12 @@ CFLAGS := -Wall -Wextra -Werror -pedantic -ansi
 INCLUDES :=
 
 # Flags to be passed to the linker.
-LDFLAGS := -Wl,--format=binary -Wl,wordlists/short_words.txt -Wl,--format=default
+LDFLAGS := -Wl,--format=binary \
+	-Wl,wordlists/short_words.txt \
+	-Wl,wordlists/370k_words.txt \
+	-Wl,wordlists/numbers.txt \
+	-Wl,wordlists/symbols.txt \
+	-Wl,--format=default
 
 # Additional directories to look in for libraries.
 #LFLAGS = -L/home/user/include
