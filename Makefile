@@ -75,7 +75,7 @@ $(BUILDDIR)/%.$(OBJEXT) : %.$(SRCEXT) $(DEPDIR)/%.$(DEPEXT)
 	$(POSTCOMPILE)
 
 clean:
-	$(RM) -rf *~ $(BUILDDIR)
+	$(RM) -rf *~ $(BUILDDIR) $(MAIN)
 
 # Ensure make doesn't fail if a dependency file doesn't exist.
 $(DEPDIR)/%.$(DEPEXT): ;
