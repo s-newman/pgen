@@ -6,30 +6,7 @@
 #include <openssl/err.h>
 #include <openssl/rand.h>
 
-extern char _binary_wordlists_short_words_txt_start;
-extern char _binary_wordlists_short_words_txt_end;
-
-std::vector<std::string> load_words()
-{
-    std::string wordlist_chars = "";
-
-    // Read the wordlist contents from memory
-    char *file = &_binary_wordlists_short_words_txt_start;
-    while(file < &_binary_wordlists_short_words_txt_end)
-    {
-        wordlist_chars += *file;
-        file++;
-    }
-
-    // Convert the string to a vector of words
-    std::istringstream iss(wordlist_chars);
-    std::vector<std::string> results(
-        (std::istream_iterator<std::string>(iss)),
-        std::istream_iterator<std::string>()
-    );
-
-    return results;
-}
+#include "wordlists.h"
 
 unsigned long random_int(unsigned long upper_bound)
 {
@@ -55,7 +32,7 @@ unsigned long random_int(unsigned long upper_bound)
 
 int main(void)
 {
-    std::vector<std::string> wordlist = load_words();
+    std::vector<std::string> wordlist = get_wordlist(Wordlist::SHORT);
 
     // Re-seed the PRNG
     int retcode = RAND_load_file("/dev/random", 32);
