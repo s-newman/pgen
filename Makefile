@@ -20,7 +20,7 @@ LFLAGS :=
 
 # Libraries to link into the executable.
 # LIBS = -lpthread
-LIBS :=
+LIBS := -lssl -lcrypto
 
 # The directory to look in for source code files.
 SRCDIR := src
@@ -71,9 +71,8 @@ $(MAIN): $(BUILDDIR)/$(OBJS)
 
 # Generic rule for building object files from source files.
 $(BUILDDIR)/%.$(OBJEXT) : %.$(SRCEXT) $(DEPDIR)/%.$(DEPEXT)
-	# Put other flags here too
 	@mkdir -p $(@D)
-	$(CC) $(DEPFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 	$(POSTCOMPILE)
 
 clean:
