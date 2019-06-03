@@ -56,7 +56,7 @@ DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.$(TMPDEPEXT)
 SRCS := $(wildcard *.$(SRCEXT)) $(wildcard **/*.$(SRCEXT))
 
 # Get the list of object files, with paths, from the list of source files.
-OBJS := $(patsubst %.$(SRCEXT),%.$(OBJEXT),$(SRCS))
+OBJS := $(addprefix $(BUILDDIR)/,$(patsubst %.$(SRCEXT),%.$(OBJEXT),$(SRCS)))
 
 # Renames temporary dependency files to real dependency files, then touches the
 # object file. This makes sure that the object file is newer than the real
@@ -71,8 +71,8 @@ $(shell mkdir -p $(BUILDDIR) $(DEPDIR) > /dev/null)
 all: $(MAIN)
 	@echo Program $(MAIN) has been compiled.
 
-$(MAIN): $(BUILDDIR)/$(OBJS)
-	$(CC) $(LDFLAGS) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(BUILDDIR)/$(OBJS) $(LFLAGS) $(LIBS)
+$(MAIN): $(OBJS)
+	$(CC) $(LDFLAGS) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(OBJS) $(LFLAGS) $(LIBS)
 
 # Generic rule for building object files from source files.
 $(BUILDDIR)/%.$(OBJEXT) : %.$(SRCEXT) $(DEPDIR)/%.$(DEPEXT)
