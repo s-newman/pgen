@@ -37,7 +37,10 @@ unsigned long random_int(unsigned long upper_bound)
 {
     // Get the random number
     unsigned long int result = ULONG_MAX;
-    int retcode = RAND_bytes((unsigned char *)&result, sizeof(unsigned long));
+    int retcode = RAND_bytes(
+        reinterpret_cast<unsigned char *>(&result),
+        sizeof(unsigned long)
+    );
 
     // Check the error code
     if(retcode != 1)
