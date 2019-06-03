@@ -15,13 +15,6 @@
 #include <sstream>
 #include <vector>
 
-/**
- * @brief A helper function to actually load the wordlist from memory.
- * 
- * @param start The address of the start of the wordlist.
- * @param end The address of the end of the wordlist.
- * @return std::vector<std::string> A list of the words in the wordlist.
- */
 std::vector<std::string> _load_wordlist(char *start, char *end)
 {
     // Use a temporary variable to store all the characters in the wordlist

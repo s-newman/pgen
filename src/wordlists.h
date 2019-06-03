@@ -75,6 +75,15 @@ extern char _binary_wordlists_symbols_txt_start;
 extern char _binary_wordlists_symbols_txt_end;
 
 /**
+ * @brief A helper function to actually load the wordlist from memory.
+ * 
+ * @param start The address of the start of the wordlist.
+ * @param end The address of the end of the wordlist.
+ * @return std::vector<std::string> A list of the words in the wordlist.
+ */
+std::vector<std::string> _load_wordlist(char *start, char *end);
+
+/**
  * @brief Read a specified wordlist from memory.
  * 
  * @param list The wordlist to be read.
