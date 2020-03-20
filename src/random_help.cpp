@@ -19,7 +19,7 @@
 bool random_init()
 {
     // Initialize using /dev/random
-    int retcode = RAND_load_file("/dev/random", 32);
+    int retcode = RAND_load_file("/dev/urandom", 32);
 
     // Check the error code
     if(retcode != 32)
