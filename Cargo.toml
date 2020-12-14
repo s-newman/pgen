@@ -1,0 +1,15 @@
+[package]
+name = "pgen"
+version = "0.1.0"
+authors = ["Sean Newman <sxn6296@rit.edu>"]
+edition = "2018"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "pgen"
+path = "src/bin.rs"
+test = false
+
+[dependencies]
