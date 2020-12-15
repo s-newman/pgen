@@ -1,6 +1,6 @@
 [package]
 name = "pgen"
-version = "2.0.0"
+version = "1.0.0"
 authors = ["Sean Newman <sxn6296@rit.edu>"]
 edition = "2018"
 
