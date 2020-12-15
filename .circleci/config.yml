@@ -31,4 +31,4 @@ workflows:
             parameters:
               target:
                 - "x86_64-unknown-linux-gnu"
-                - "x86_54-unknown-linux-musl"
+                - "x86_64-unknown-linux-musl"
