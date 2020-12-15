@@ -1,0 +1,9 @@
+[package]
+name = "pgen"
+version = "1.0.0"
+authors = ["Sean Newman <sxn6296@rit.edu>"]
+edition = "2018"
+
+[dependencies]
+rand = "0.7.3"
+structopt = "0.3.21"
