@@ -1,0 +1,34 @@
+version: 2.1
+
+jobs:
+  check:
+    docker:
+      - image: cimg/rust:1.48.0
+    steps:
+      - checkout
+      - run: cargo clippy -v -- -D warnings
+      - run: cargo fmt -v -- -v --check
+  build_test:
+    parameters:
+      target:
+        type: string
+        default: x86_64-unknown-linux-gnu
+    docker:
+      - image: cimg/rust:1.48.0
+    steps:
+      - checkout
+      - run: rustup target add << parameters.target >>
+      - run: cargo build -v --release --target << parameters.target >>
+      - run: cargo test -v --release --target << parameters.target >>
+      - run: cargo doc --no-deps
+
+workflows:
+  main:
+    jobs:
+      - check
+      - build_test:
+          matrix:
+            parameters:
+              target:
+                - "x86_64-unknown-linux-gnu"
+                - "x86_64-unknown-linux-musl"

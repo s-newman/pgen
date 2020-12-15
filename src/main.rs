@@ -1,9 +1,10 @@
+#![warn(clippy::all, clippy::pedantic)]
 use rand::prelude::*;
 use structopt::StructOpt;
 
-const WORDS: &'static str = include_str!("../wordlists/370k_words.txt");
-const NUMBERS: &'static str = include_str!("../wordlists/numbers.txt");
-const SYMBOLS: &'static str = include_str!("../wordlists/symbols.txt");
+const WORDS: &str = include_str!("../wordlists/370k_words.txt");
+const NUMBERS: &str = include_str!("../wordlists/numbers.txt");
+const SYMBOLS: &str = include_str!("../wordlists/symbols.txt");
 
 #[derive(Debug, StructOpt)]
 #[structopt(name = "pgen", about = "A wordlist-based password generator.")]
