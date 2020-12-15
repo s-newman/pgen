@@ -1,7 +1,14 @@
 version: 2.1
 
 jobs:
-  build_test_notify:
+  check:
+    docker:
+      - image: cimg/rust:1.48.0
+    steps:
+      - checkout
+      - run: cargo clippy -- -D warnings
+      - run: cargo fmt -- --check
+  build_test:
     parameters:
       target:
         type: string
@@ -13,11 +20,15 @@ jobs:
       - run: rustup target add << parameters.target >>
       - run: cargo build --release --verbose --target << parameters.target >>
       - run: cargo test --release --verbose --target << parameters.target >>
+      - run: cargo doc --no-deps
 
 workflows:
   main:
     jobs:
+      - check
       - build_test_notify:
           matrix:
             parameters:
-              target: ["x86_64-unknown-linux-gnu", "x86_64-unknown-linux-musl"]
+              target:
+                - "x86_64-unknown-linux-gnu"
+                - "x86_54-unknown-linux-musl"
