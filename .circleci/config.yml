@@ -6,8 +6,8 @@ jobs:
       - image: cimg/rust:1.48.0
     steps:
       - checkout
-      - run: cargo clippy -- -D warnings
-      - run: cargo fmt -- --check
+      - run: cargo clippy -v -- -D warnings
+      - run: cargo fmt -v -- -v --check
   build_test:
     parameters:
       target:
@@ -18,8 +18,8 @@ jobs:
     steps:
       - checkout
       - run: rustup target add << parameters.target >>
-      - run: cargo build --release --verbose --target << parameters.target >>
-      - run: cargo test --release --verbose --target << parameters.target >>
+      - run: cargo build -v --release --target << parameters.target >>
+      - run: cargo test -v --release --target << parameters.target >>
       - run: cargo doc --no-deps
 
 workflows:
