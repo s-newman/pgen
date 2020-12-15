@@ -26,7 +26,7 @@ workflows:
   main:
     jobs:
       - check
-      - build_test_notify:
+      - build_test:
           matrix:
             parameters:
               target:
