@@ -1,0 +1,23 @@
+version: 2.1
+
+jobs:
+  build_test_notify:
+    parameters:
+      target:
+        type: string
+        default: x86_64-unknown-linux-gnu
+    docker:
+      - image: cimg/rust:1.48.0
+    steps:
+      - checkout
+      - run: rustup target add << parameters.target >>
+      - run: cargo build --release --verbose --target << parameters.target >>
+      - run: cargo test --release --verbose --target << parameters.target >>
+
+workflows:
+  main:
+    jobs:
+      - build_test_notify:
+          matrix:
+            parameters:
+              target: ["x86_64-unknown-linux-gnu", "x86_64-unknown-linux-musl"]
