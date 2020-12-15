@@ -2,6 +2,8 @@
 use rand::prelude::*;
 use structopt::StructOpt;
 
+use pgen_core::pattern::Pattern;
+
 const WORDS: &str = include_str!("../../wordlists/370k_words.txt");
 const NUMBERS: &str = include_str!("../../wordlists/numbers.txt");
 const SYMBOLS: &str = include_str!("../../wordlists/symbols.txt");
@@ -11,6 +13,9 @@ const SYMBOLS: &str = include_str!("../../wordlists/symbols.txt");
 struct Arguments {
     #[structopt(short, long, default_value = "1")]
     count: usize,
+
+    #[structopt(short, long, default_value = "WNSWNSWNW")]
+    pattern: Pattern,
 }
 
 fn main() {
