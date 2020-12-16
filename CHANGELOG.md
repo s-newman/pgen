@@ -18,6 +18,10 @@ Sections appear in the following order:
 [Unreleased]
 ------------
 
+### Added
+
+- Password generation customization ([#2](https://github.com/s-newman/pgen/issues/2))
+
 ### Changed
 
 - Reimplemented in Rust
