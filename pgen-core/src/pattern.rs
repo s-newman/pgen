@@ -3,8 +3,8 @@
 use std::convert::TryFrom;
 use std::str::FromStr;
 
-use crate::error::PgenError;
 use crate::wordlist::Wordlist;
+use crate::PgenError;
 
 /// A description of how a password should be generated.
 #[derive(Debug)]
@@ -35,7 +35,7 @@ impl Pattern {
     pub fn generate(&mut self) -> String {
         let mut password = String::default();
 
-        for list in self.0.iter_mut() {
+        for list in &mut self.0 {
             password.push_str(list.pick());
         }
 
