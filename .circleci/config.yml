@@ -19,12 +19,18 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - deps-<< parameters.target >>-{{ checksum "Cargo.lock" }}
-            - deps-<< parameters.target >>
+            - deps-v1-<< parameters.target >>-{{ checksum "Cargo.lock" }}
+            - deps-v1-<< parameters.target >>
+
       - run: rustup target add << parameters.target >>
       - run: cargo build -v --release --target << parameters.target >>
       - run: cargo test -v --release --target << parameters.target >>
       - run: cargo doc --no-deps
+
+      - save_cache:
+          key: deps-v1-<< parameters.target >>-{{ checksum "Cargo.lock" }}
+          paths:
+            - target/
 
 workflows:
   main:
