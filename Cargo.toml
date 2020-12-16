@@ -1,9 +1,5 @@
-[package]
-name = "pgen"
-version = "0.1.0"
-authors = ["Sean Newman <sxn6296@rit.edu>"]
-edition = "2018"
+[workspace]
+members = ["pgen-cli", "pgen-core"]
 
-[dependencies]
-rand = "0.7.3"
-structopt = "0.3.21"
+[profile.release]
+lto = true
