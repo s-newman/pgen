@@ -1,3 +1,5 @@
+//! A command-line password generator.
+
 #![warn(
     clippy::all,
     clippy::pedantic,

@@ -3,6 +3,12 @@ name = "pgen-cli"
 version = "0.1.0"
 authors = ["Sean Newman <sxn6296@rit.edu>"]
 edition = "2018"
+description = "A command-line password generator."
+license = "MIT"
+repository = "https://github.com/s-newman/pgen"
+readme = "../README.md"
+keywords = ["password", "passphrase", "generator"]
+categories = ["command-line-utilities"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
