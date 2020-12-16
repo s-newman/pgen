@@ -16,11 +16,11 @@ jobs:
     docker:
       - image: cimg/rust:1.48.0
     steps:
+      - checkout
       - restore_cache:
           keys:
             - deps-<< parameters.target >>-{{ checksum "Cargo.lock" }}
             - deps-<< parameters.target >>
-      - checkout
       - run: rustup target add << parameters.target >>
       - run: cargo build -v --release --target << parameters.target >>
       - run: cargo test -v --release --target << parameters.target >>
