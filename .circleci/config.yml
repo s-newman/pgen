@@ -19,8 +19,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - deps-v1-<< parameters.target >>-{{ checksum "Cargo.lock" }}
-            - deps-v1-<< parameters.target >>
+            - deps-v2-<< parameters.target >>-{{ checksum "Cargo.lock" }}
+            - deps-v2-<< parameters.target >>
 
       - run: rustup target add << parameters.target >>
       - run: cargo build -v --release --target << parameters.target >>
@@ -28,7 +28,7 @@ jobs:
       - run: cargo doc --no-deps
 
       - save_cache:
-          key: deps-v1-<< parameters.target >>-{{ checksum "Cargo.lock" }}
+          key: deps-v2-<< parameters.target >>-{{ checksum "Cargo.lock" }}
           paths:
             - target/
             - /home/circleci/.cargo
