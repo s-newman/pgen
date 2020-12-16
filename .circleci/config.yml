@@ -31,6 +31,7 @@ jobs:
           key: deps-v1-<< parameters.target >>-{{ checksum "Cargo.lock" }}
           paths:
             - target/
+            - /home/circleci/.cargo
 
 workflows:
   main:
