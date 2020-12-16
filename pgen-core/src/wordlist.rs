@@ -44,6 +44,11 @@ impl Wordlist {
     pub fn pick(&mut self) -> &'static str {
         self.list[self.rng.gen_range(0, self.list.len())]
     }
+
+    /// Return the number of words available in the wordlist.
+    pub fn words(&self) -> usize {
+        self.list.len()
+    }
 }
 
 impl TryFrom<char> for Wordlist {
