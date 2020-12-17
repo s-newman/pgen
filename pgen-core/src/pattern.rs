@@ -127,3 +127,24 @@ impl FromStr for Pattern {
         Ok(Pattern(lists))
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    use num_bigint::BigUint;
+
+    fn combos_100() -> Pattern {
+        Pattern::from_str("NN").unwrap()
+    }
+
+    #[test]
+    fn entropy_100_combos() {
+        assert_eq!(combos_100().entropy_bits(), 6);
+    }
+
+    #[test]
+    fn combinations_100() {
+        assert_eq!(combos_100().combinations(), BigUint::from(100_u8));
+    }
+}

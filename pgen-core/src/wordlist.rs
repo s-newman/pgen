@@ -65,6 +65,7 @@ impl TryFrom<char> for Wordlist {
             c => return Err(PgenError::UnknownWordlist(c.to_string())),
         }
         .split('\n')
+        .filter(|elem| !elem.trim().is_empty())
         .collect();
 
         let rng = thread_rng();
