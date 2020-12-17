@@ -44,6 +44,11 @@ impl Wordlist {
     pub fn pick(&mut self) -> &'static str {
         self.list[self.rng.gen_range(0, self.list.len())]
     }
+
+    /// Return the number of words available in the wordlist.
+    pub fn words(&self) -> usize {
+        self.list.len()
+    }
 }
 
 impl TryFrom<char> for Wordlist {
@@ -60,6 +65,7 @@ impl TryFrom<char> for Wordlist {
             c => return Err(PgenError::UnknownWordlist(c.to_string())),
         }
         .split('\n')
+        .filter(|elem| !elem.trim().is_empty())
         .collect();
 
         let rng = thread_rng();
