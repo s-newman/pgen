@@ -56,13 +56,49 @@ struct Arguments {
     /// of a short word followed by a symbol, then a number.
     #[structopt(short, long, default_value = "wNwSWNSw")]
     pattern: Pattern,
+
+    /// Optional subcommands that can be run.
+    ///
+    /// The default behavior if no subcommands are passed is to run the password generation routine.
+    /// If a subcommand is passed, then the subcommand will be run instead of generating a password.
+    #[structopt(subcommand)]
+    cmd: Option<Command>,
+}
+
+/// The available optional subcommands.
+#[derive(Debug, StructOpt)]
+enum Command {
+    /// Calculate and display the number of bits of entropy in the given password pattern string.
+    ///
+    /// Bits of entropy can be useful when comparing the strength of a password to the security of a
+    /// symmetrical key. For example, a password with 128 bits of entropy should be about as
+    /// difficult to guess as an AES-128 key.
+    ///
+    /// The recommended amount of entropy depends on your use case and threat model. More entropy is
+    /// recommended for passwords that will be in use for longer, are used to secure privileged
+    /// access or sensitive information, or are hashed with relatively weak hashing algorithms. On
+    /// the other hand, high-entropy passwords can be difficult to remember even when generated as
+    /// "passphrases".
+    Entropy,
 }
 
 fn main() {
     // Parse arguments
     let mut args = Arguments::from_args();
 
-    for _ in 0..args.count {
-        println!("{}", args.pattern.generate());
+    // Run the correct routine
+    if let Some(cmd) = args.cmd {
+        match cmd {
+            Command::Entropy => {
+                println!(
+                    "This pattern has {} bits of entropy.",
+                    args.pattern.entropy_bits()
+                );
+            }
+        }
+    } else {
+        for _ in 0..args.count {
+            println!("{}", args.pattern.generate());
+        }
     }
 }
